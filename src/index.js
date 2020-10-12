@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Poruka from './components/Poruka'
 
 const poruke = [
   {
@@ -22,11 +23,6 @@ const poruke = [
   }
 ]
 
-const Poruka = ({poruka}) => {
-  return (
-    <li>{poruka.sadrzaj}</li>
-  )
-}
 
 const App = ({poruke}) => {
   return (
