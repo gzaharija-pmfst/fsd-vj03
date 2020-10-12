@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Poruka from './components/Poruka'
+import App from './App'
 
 const poruke = [
   {
@@ -22,22 +22,6 @@ const poruke = [
     vazno: true
   }
 ]
-
-
-const App = ({poruke}) => {
-  return (
-    <div>
-      <h1>Poruke</h1>
-      <ul>
-        {poruke.map(p =>
-          <Poruka key={p.id} poruka={p} />
-        )}        
-      </ul>
-    </div>
-  )
-}
-
-
 ReactDOM.render(
   <App poruke={poruke} />,
   document.getElementById('root')
