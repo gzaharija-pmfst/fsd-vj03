@@ -40,6 +40,20 @@ const App = () => {
     console.log(e.target.value);
     postaviUnos(e.target.value)
   }
+
+  const promjenaVaznostiPoruke = (id) => {
+    const url = `http://localhost:3001/poruke/${id}`
+    const poruka = poruke.find(p => p.id === id)
+    const modPoruka = {
+      ...poruka,
+      vazno: !poruka.vazno
+    }
+
+    axios.put(url, modPoruka)
+      .then(response => {
+        postaviPoruke(poruke.map(p => p.id !== id ? p : response.data))
+      })
+  }
   return (
     <div>
       <h1>Poruke</h1>
@@ -50,7 +64,10 @@ const App = () => {
       </div>
       <ul>
         {porukeZaIspis.map(p =>
-          <Poruka key={p.id} poruka={p} />
+          <Poruka
+            key={p.id}
+            poruka={p}
+            promjenaVaznosti={() => promjenaVaznostiPoruke(p.id)} />
         )}
       </ul>
       <form onSubmit={novaPoruka}>

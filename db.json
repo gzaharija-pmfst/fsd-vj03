@@ -21,7 +21,7 @@
     {
       "sadrzaj": "Test",
       "datum": "2020-10-13T07:57:42.614Z",
-      "vazno": false,
+      "vazno": true,
       "id": 4
     }
   ]
