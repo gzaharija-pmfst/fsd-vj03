@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Poruka from './components/Poruka'
 import axios from 'axios'
+import porukeServer from './services/poruke'
 
 const App = () => {
   const [poruke, postaviPoruke] = useState([])
@@ -9,12 +10,13 @@ const App = () => {
 
   useEffect(() => {
     console.log("Effect hook");
-    axios.get('http://localhost:3001/poruke').then(response => {
-      console.log("Promise fullfiled");
-      postaviPoruke(response.data)
-    })
+    porukeServer
+      .dohvatiSve()
+      .then(response => {
+        console.log("Promise fullfiled");
+        postaviPoruke(response.data)
+      })
   }, [])
-  console.log("Renderirano", poruke.length, 'poruka');
 
   const porukeZaIspis = ispisSve
     ? poruke
@@ -28,10 +30,10 @@ const App = () => {
       datum: new Date(),
       vazno: Math.random() > 0.5
     }
-    axios
-      .post('http://localhost:3001/poruke', noviObjekt)
+    porukeServer
+      .stvori(noviObjekt)
       .then(response => {
-        postaviPoruke(poruke.concat(noviObjekt))
+        postaviPoruke(poruke.concat(response.data))
         postaviUnos('')
       })
   }
@@ -42,16 +44,20 @@ const App = () => {
   }
 
   const promjenaVaznostiPoruke = (id) => {
-    const url = `http://localhost:3001/poruke/${id}`
     const poruka = poruke.find(p => p.id === id)
-    const modPoruka = {
-      ...poruka,
-      vazno: !poruka.vazno
-    }
+    const modPoruka = { ...poruka, vazno: !poruka.vazno }
+    console.log("Promjena id", id)
 
-    axios.put(url, modPoruka)
+    porukeServer
+      .osvjezi(id, modPoruka)
       .then(response => {
         postaviPoruke(poruke.map(p => p.id !== id ? p : response.data))
+      })
+      .catch(error =>{
+        alert(
+          `Poruka "${poruka.sadrzaj}" je uklonjena sa poslužitelja`
+        )
+        postaviPoruke(poruke.filter(p => p.id !== id))
       })
   }
   return (

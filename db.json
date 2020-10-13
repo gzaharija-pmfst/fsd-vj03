@@ -14,15 +14,45 @@
     },
     {
       "id": 3,
-      "sadrzaj": "GET i POST su najvaznije metode HTTP protokola",
-      "datum": "2019-05-30T19: 20: 14.298Z",
-      "vazno": true
+      "sadrzaj": "HTML je jednostavan",
+      "datum": "2019-05-30T17: 30: 31.098Z",
+      "vazno": false
     },
     {
       "sadrzaj": "Test",
       "datum": "2020-10-13T07:57:42.614Z",
       "vazno": true,
       "id": 4
+    },
+    {
+      "sadrzaj": "Spremi..",
+      "datum": "2020-10-13T10:31:27.219Z",
+      "vazno": false,
+      "id": 5
+    },
+    {
+      "sadrzaj": "Nova",
+      "datum": "2020-10-13T12:03:54.383Z",
+      "vazno": true,
+      "id": 6
+    },
+    {
+      "sadrzaj": "OPet nova",
+      "datum": "2020-10-13T12:06:13.481Z",
+      "vazno": false,
+      "id": 7
+    },
+    {
+      "sadrzaj": "aa...",
+      "datum": "2020-10-13T12:07:37.672Z",
+      "vazno": false,
+      "id": 8
+    },
+    {
+      "sadrzaj": "Sada sve radi",
+      "datum": "2020-10-13T12:16:46.996Z",
+      "vazno": true,
+      "id": 9
     }
   ]
 }
