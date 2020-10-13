@@ -1,10 +1,20 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Poruka from './components/Poruka'
+import axios from 'axios'
 
-const App = (props) => {
-  const [ poruke, postaviPoruke] = useState(props.poruke)
+const App = () => {
+  const [ poruke, postaviPoruke] = useState([])
   const [ unosPoruke, postaviUnos] = useState('unesi poruku...')
   const [ ispisSve, postaviIspis] = useState(true)
+
+  useEffect( () =>{
+    console.log("Effect hook");
+    axios.get('http://localhost:3001/poruke').then( response =>{
+      console.log("Promise fullfiled");
+      postaviPoruke(response.data)
+    })
+  }, [])
+  console.log("Renderirano", poruke.length, 'poruka');
 
   const porukeZaIspis = ispisSve
   ? poruke
