@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import Poruka from './components/Poruka'
-import axios from 'axios'
+import Notifikacija from './components/Notifikacija'
 import porukeServer from './services/poruke'
+
+const Footer = () => {
+  const footerStil = {
+    color: 'green',
+    fontStyle: 'italic',
+    fontSize : 16
+  }
+  return (
+    <div style={footerStil}>
+      <br />
+      <em> Okviri i alati za razvoj web aplikacija</em>
+    </div>
+  )
+}
 
 const App = () => {
   const [poruke, postaviPoruke] = useState([])
   const [unosPoruke, postaviUnos] = useState('unesi poruku...')
   const [ispisSve, postaviIspis] = useState(true)
+  const [errorPoruka, postaviErrorPoruku] = useState(null)
 
   useEffect(() => {
     console.log("Effect hook");
@@ -54,15 +69,19 @@ const App = () => {
         postaviPoruke(poruke.map(p => p.id !== id ? p : response.data))
       })
       .catch(error =>{
-        alert(
-          `Poruka "${poruka.sadrzaj}" je uklonjena sa poslužitelja`
+        postaviErrorPoruku(
+          `Poruka ${poruka.sadrzaj} je izbrisana sa poslužitelja`
         )
+        setTimeout(() =>{
+          postaviErrorPoruku(null)
+        }, 5000)
         postaviPoruke(poruke.filter(p => p.id !== id))
       })
   }
   return (
     <div>
       <h1>Poruke</h1>
+      <Notifikacija poruka={errorPoruka} />
       <div>
         <button onClick={() => postaviIspis(!ispisSve)}>
           Prikaži {ispisSve ? "važne" : "sve"}
@@ -80,6 +99,7 @@ const App = () => {
         <input value={unosPoruke} onChange={promjenaUnosa} />
         <button type='submit'>Spremi</button>
       </form>
+      <Footer />
     </div>
   )
 }

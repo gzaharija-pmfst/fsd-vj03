@@ -5,7 +5,7 @@ const Poruka = ({poruka, promjenaVaznosti}) => {
   ? 'označi kao nevažno' : 'označi kao važno'
   
   return (
-    <li>
+    <li className="poruka">
       {poruka.sadrzaj}
       <button onClick={promjenaVaznosti}>{oznaka}</button>
     </li>
